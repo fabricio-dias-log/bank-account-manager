@@ -28,15 +28,16 @@ public class Account
 
     public void WithDraw(double amount)
     {
-        if (Balance <= 0.00)
-        {
-            throw new DomainException("Withdraw error: No enough balance!");
-        }
-
         if (amount > WithDrawLimit)
         {
             throw new DomainException("Withdraw error: you have no limit!");
         }
+
+        if (Balance <= 0.00 || amount > Balance)
+        {
+            throw new DomainException("Withdraw error: Not enough balance!");
+        }
+
 
         Balance -= amount;
     }
